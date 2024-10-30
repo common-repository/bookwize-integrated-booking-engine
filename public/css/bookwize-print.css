@@ -1,0 +1,83 @@
+@media print {
+    header, footer {
+        display: none !important;
+    }
+
+    .info-text header {
+        display: block !important;
+    }
+
+    .bookwize-integrated .reservation {
+        width: 100%;
+        margin: 0;
+    }
+
+    .bookwize-integrated #Footer .contact-info {
+        display: block;
+        width: 100%;
+        font-size: 11px;
+        text-align: center
+    }
+
+    .bookwize-integrated #Footer .contact-info h3 {
+        margin: 10px 0;
+        font-size: 13px
+    }
+
+    .bookwize-integrated .label {
+        border: none
+    }
+
+    .bookwize-integrated .horizontal-line-arrow {
+        margin: 5px 0
+    }
+
+    .bookwize-integrated .reservation .reservation-rooms, .bookwize-integrated .reservation .reservation-supplements {
+        padding: 15px 0 0 0
+    }
+
+    .bookwize-integrated .reservation .reservation-rooms .supplement, .bookwize-integrated .reservation .reservation-supplements .supplement, .bookwize-integrated .reservation .reservation-rooms .room, .bookwize-integrated .reservation .reservation-supplements .room {
+        padding: 5px 0
+    }
+
+    .bookwize-integrated .reservation .reservation-rooms .supplement .title, .bookwize-integrated .reservation .reservation-supplements .supplement .title, .bookwize-integrated .reservation .reservation-rooms .room .title, .bookwize-integrated .reservation .reservation-supplements .room .title, .bookwize-integrated .reservation .reservation-rooms .supplement .guests, .bookwize-integrated .reservation .reservation-supplements .supplement .guests, .bookwize-integrated .reservation .reservation-rooms .room .guests, .bookwize-integrated .reservation .reservation-supplements .room .guests, .bookwize-integrated .reservation .reservation-rooms .supplement .rateplan, .bookwize-integrated .reservation .reservation-supplements .supplement .rateplan, .bookwize-integrated .reservation .reservation-rooms .room .rateplan, .bookwize-integrated .reservation .reservation-supplements .room .rateplan, .bookwize-integrated .reservation .reservation-rooms .supplement .price, .bookwize-integrated .reservation .reservation-supplements .supplement .price, .bookwize-integrated .reservation .reservation-rooms .room .price, .bookwize-integrated .reservation .reservation-supplements .room .price, .bookwize-integrated .reservation .reservation-rooms .supplement .supplement-name, .bookwize-integrated .reservation .reservation-supplements .supplement .supplement-name, .bookwize-integrated .reservation .reservation-rooms .room .supplement-name, .bookwize-integrated .reservation .reservation-supplements .room .supplement-name, .bookwize-integrated .reservation .reservation-rooms .supplement .quantity, .bookwize-integrated .reservation .reservation-supplements .supplement .quantity, .bookwize-integrated .reservation .reservation-rooms .room .quantity, .bookwize-integrated .reservation .reservation-supplements .room .quantity {
+        display: inline-block;
+        font-size: 14px
+    }
+
+    .bookwize-integrated .reservation .reservation-rooms .supplement .title, .bookwize-integrated .reservation .reservation-supplements .supplement .title, .bookwize-integrated .reservation .reservation-rooms .room .title, .bookwize-integrated .reservation .reservation-supplements .room .title, .bookwize-integrated .reservation .reservation-rooms .supplement .guests, .bookwize-integrated .reservation .reservation-supplements .supplement .guests, .bookwize-integrated .reservation .reservation-rooms .room .guests, .bookwize-integrated .reservation .reservation-supplements .room .guests, .bookwize-integrated .reservation .reservation-rooms .supplement .quantity, .bookwize-integrated .reservation .reservation-supplements .supplement .quantity, .bookwize-integrated .reservation .reservation-rooms .room .quantity, .bookwize-integrated .reservation .reservation-supplements .room .quantity, .bookwize-integrated .reservation .reservation-rooms .supplement .rateplan, .bookwize-integrated .reservation .reservation-supplements .supplement .rateplan, .bookwize-integrated .reservation .reservation-rooms .room .rateplan, .bookwize-integrated .reservation .reservation-supplements .room .rateplan {
+        font-family: 'open_sansregular', Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        line-height: 13px;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        text-transform: none;
+        color: #333
+    }
+
+    .bookwize-integrated .reservation .reservation-totals .grand-total-label {
+        font-weight: normal;
+        display: inline-block;
+        position: relative;
+        top: 0
+    }
+
+    .bookwize-integrated .reservation .reservation-totals .price {
+        display: inline-block;
+        font-size: 15px
+    }
+
+    .bookwize-integrated .step4-content .text {
+        font-size: 14px;
+    }
+
+    html, body, .bookwize-integrated .step4-content .label {
+        font-size: 12px;
+    }
+
+    .sidebar, .bookwize-reservation-submenu {
+        display: none !important;
+    }
+
+}

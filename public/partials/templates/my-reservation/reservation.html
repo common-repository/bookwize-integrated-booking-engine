@@ -1,0 +1,505 @@
+<div class="col-sm-12 mobile-no-padding">
+    <div class="col-sm-12 col-md-3 mobile-no-padding">
+
+        <div class="bookwize-reservation-submenu">
+
+            <div class="bookwize-navbar-submenu">
+
+                <div class="bookwize-nav nav-welcome" data-bind="click: function(){ setView('welcome')}">
+                    <span data-bind="translate: 'benefits'"></span><i class="fa fa-angle-right"></i>
+                </div>
+                <div class="bookwize-nav nav-account" data-bind="click: function(){setView('account')}">
+                    <span data-bind="translate: 'account'"></span><i class="fa fa-angle-right"></i>
+                </div>
+                <div class="bookwize-nav nav-reservation" data-bind="click: function(){setView('reservation')}">
+                    <span data-bind="translate: 'reservation'"></span><i class="fa fa-angle-right"></i>
+                </div>
+                <div class="bookwize-nav" data-bind="click: logout, translate: 'logout'"></div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-9 col-sm-12 mobile-no-padding">
+        <div class="clearfix" data-bind="with: reservation">
+
+            <section class="reservation">
+
+                <header class="reservation-title text-center">
+
+                    <div class="visible-print-block" data-bind="title : header.name">
+                        <img data-bind="visible: header.showLogo(), attr: {src: header.logo() + '?width=350&height=200', alt : header.name}" />
+                        <span data-bind="text: name, visible: !header.showLogo()"></span>
+                    </div>
+
+                    <div class="hidden-print">
+                        <span data-bind="translate: 'welcomeBack'"></span>
+                        <small data-bind="text: customer.title, visible: customer.title() != 'Unknown' "></small>
+                        <span data-bind="text: customer.fullName()"></span>
+                    </div>
+
+                </header>
+
+                <button class="print hidden-print" onclick="window.print()"><i class="glyphicon glyphicon-print"></i></button>
+
+                <div class="horizontal-line-arrow">
+                    <div class="arrow"></div>
+                </div>
+
+                <aside class="info-text text-center">
+                    <header data-bind="translate: 'myReservation'"></header>
+                </aside>
+
+                <div class="col-sm-12">
+                    <div data-bind="visible: $root.hasMessage()">
+                        <div class="message" data-bind="visible: $root.message().id() == 200">
+                            <p data-bind="css: 'alert alert-' + ($root.message().severity() == 'error' ? 'danger' : $root.message().severity())">
+                                <span data-bind="text: $root.message().text()"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customer">
+                    <div class="clearfix">
+
+                        <div class="col-sm-12">
+                            <div class="label" data-bind="translate: 'status'"></div>
+                            <div class="text reservation-status" data-bind="reservationStatus: status()">
+                                <span data-bind="translate: 'reservationStatus.' + status()"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="label" data-bind="translate: 'bookingNumber'"></div>
+                            <div class="text" data-bind="text: code"></div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="label" data-bind="translate: 'pinCode'"></div>
+                            <div class="text" data-bind="text: id"></div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="label" data-bind="translate: 'arrival'"></div>
+                            <div class="text" data-bind="date: checkIn, dateFormat: 'DD/MM/YYYY'"></div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="label" data-bind="translate: 'departure'"></div>
+                            <div class="text" data-bind="date: checkOut, dateFormat: 'DD/MM/YYYY'"></div>
+                        </div>
+                    </div>
+
+            
+                </div>
+
+                <div class="sep"></div>
+
+                <div class="clearfix">
+
+                    <section data-bind="foreach: rooms" class="reservation-rooms">
+
+                        <article class="room clearfix">
+                            <div class="clearfix room-index">
+                                <div class="label">
+                                    <span data-bind="translate: 'room'"></span> <span data-bind="text: $index()+1"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 title">
+                                <header data-bind="text: name"></header>
+
+                                <p><small data-bind="text: board.name"></small></p>
+                            </div>
+                            <div class="col-sm-4 guests">
+                                <span data-bind="text: adults"></span>
+                                <!-- ko if: adults == 1 --><span data-bind="translate: 'adult'"></span><!-- /ko -->
+                                <!-- ko if: adults > 1 --><span data-bind="translate: 'adults'"></span><!-- /ko -->
+                                <!-- ko if: children > 0 -->, <span data-bind="text: children"></span> <span data-bind="translate: 'children'"></span><!-- /ko -->
+                                <!-- ko if: infants > 0 -->, <span data-bind="text: infants"></span> <span data-bind="translate: 'infants'"></span><!-- /ko -->
+                            </div>
+                            <div class="col-sm-2 rateplan">
+                                <span data-bind="text: ratePlanName"></span>
+                            </div>
+                            <div class="col-sm-2 text-right price">
+                                <span data-bind="money: totalCost"></span>
+                            </div>
+                        </article>
+
+                    </section>
+
+                    <div data-bind="visible: supplements.length > 0">
+
+                        <section class="reservation-supplements">
+                            <div class="clearfix">
+                                <div class="col-sm-4">
+                                    <div class="label" data-bind="translate: 'extraSupplements'"></div>
+                                </div>
+                            </div>
+                            <div data-bind="foreach: supplements">
+
+                                <article class="supplement clearfix">
+
+                                    <div class="col-sm-8 supplement-name">
+                                        <header class="title" data-bind="text: name"></header>
+                                    </div>
+
+                                    <div class="col-sm-2 quantity">
+                                        &times;
+                                        <span data-bind="text: quantity()"></span>
+                                    </div>
+
+                                    <div class="col-sm-2 text-right price" data-bind="money: totalPrice()"></div>
+
+                                </article>
+                            </div>
+                        </section>
+
+                    </div>
+                </div>
+
+                <div class="sep"></div>
+
+                <div class="reservation-totals clearfix">
+
+                    <div class="col-sm-10 grand-total-label">
+                        <span data-bind="translate: 'total'"></span> :
+                    </div>
+
+                    <div class="col-sm-2 text-right price">
+                        <div data-bind="money: totalCost"></div>
+                    </div>
+                    <!-- ko if:totalExcludedTaxes() > 0 -->
+                    <br />
+                    <br />
+                    <div class="col-sm-10">
+                        <div>
+                            <div class="grid taxes">
+                                <div>
+                                    <span data-bind="translate: 'extraFees'" class="label"></span>
+
+                                    <!-- ko foreach: excludedTaxesCheckIn() -->
+                                    <div class="grid">
+                                        <div class="grid__item one-half text-left">
+                                            <div data-bind="translate: category"></div>
+                                        </div>
+
+                                        <div class="grid__item one-half">
+
+                                            <span class="bookwize-price">
+                                                <span data-bind="money: amount"></span>
+                                            </span>
+                                            <span class="bookwize-tax" data-bind="translate:'payableAtCheckIn'"></span>
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                    <!-- ko foreach: excludedTaxesCheckOut() -->
+                                    <div class="grid">
+                                        <div class="grid__item one-half text-left">
+                                            <div data-bind="translate: category"></div>
+                                        </div>
+                                        <div class="grid__item one-half">
+
+                                            <div class="bookwize-price">
+                                                <div data-bind="money: amount"></div>
+                                            </div>
+                                            <div class="bookwize-tax" data-bind="translate:'payableAtCheckOut'"></div>
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+
+
+                <div class="terms-conditions-holder clearfix">
+                    <div class="col-sm-12">
+                        <header data-bind="translate: 'cancellationPolicy'" class="label"></header>
+                        <div class="body" data-bind="html: reservationTerms"></div>
+
+                    </div>
+
+
+                </div>
+                <br /><br />
+                <div class="hidden-print" data-bind="if: availableActions().length > 0">
+
+                    <div class="horizontal-line-arrow">
+                        <div class="arrow"></div>
+                    </div>
+
+                    <aside class="info-text text-center">
+                        <header data-bind="translate: 'availableActions'"></header>
+                    </aside>
+
+                    <div class="clearfix">
+
+                        <div data-bind="foreach: availableActions">
+
+                            <div data-bind="if: $data == 'CancelledReservation' || $data == 'CancelledRequest'">
+
+                                <div class="booking-form clearfix cancel-reservation">
+
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+                                                <form role="form" class="form-inline" data-bind="validationOptions: { messageTemplate: 'IBEValidationMessage' }">
+                                                    <fieldset>
+                                                        <legend data-bind="translate: 'cancel'"></legend>
+                                                        <!-- ko ifnot: $parent.allowCancellation() -->
+                                                            <p data-bind="translate: 'denyCancellationMessage'"></p>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: $parent.allowCancellation() -->
+                                                            <p data-bind="translate: 'cancelReservationNote'"></p>
+
+                                                            <p data-bind="visible: $root.reservation().cancellationCost() == 0, translate: 'cancelFreeCharge'"></p>
+
+                                                            <div data-bind="visible: $root.reservation().cancellationCost() > 0">
+                                                                <span data-bind="translate: 'cancelCharge'"></span> <span data-bind="money: $root.reservation().cancellationCost()"></span>
+                                                            </div>
+
+                                                            <div data-bind="visible: $root.hasMessage()">
+                                                                <div class="message" data-bind="visible: $root.message().id() == 5001">
+                                                                    <p data-bind="css: 'alert alert-' + ($root.message().severity() == 'error' ? 'danger' : $root.message().severity())">
+                                                                        <span data-bind="text: $root.message().text()"></span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <p>
+                                                                    <input id="ReservationCode" data-bind="value: $root.cancelCode, attr: { placeholder: IBE.Utils.translate('bookingNumber') }" type="text" name="reservation_code" class="form-control">
+                                                                    <button class="btn btn-cancel" data-bind="translate: 'reservationStatusAction.'+$data, click: $root.confirmAction.bind($data)"></button>
+                                                                </p>
+
+                                                            </div>
+                                                        <!-- /ko -->
+                                                    </fieldset>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div data-bind="if: $data == 'ConfirmedReservation'">
+
+                                <div class="booking-form clearfix confirm-reservation">
+
+                                    <div class="col-md-12">
+
+                                        <form role="form" data-bind="with: $root.customer().creditCard" method="post">
+
+                                            <fieldset data-bind="validationOptions: { messageTemplate: 'IBEValidationMessage' }">
+
+                                                <legend data-bind="translate: 'confirm'"></legend>
+
+                                                <p data-bind="translate: 'confirmReservationNote'"></p>
+
+                                                <div data-bind="visible: $root.hasMessage()">
+                                                    <div class="message" data-bind="visible: $root.message().id() == 5002">
+                                                        <p data-bind="css: 'alert alert-' + ($root.message().severity() == 'error' ? 'danger' : $root.message().severity())">
+                                                            <span data-bind="text: $root.message().text()"></span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                        <div class="form-group required">
+                                                            <label for="CustomerCardHolder" data-bind="translate: 'label_cardHolder'"></label>
+                                                            <input id="CustomerCardHolder" data-bind="value: cardHolder" type="text" name="card_holder" class="form-control required">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <p data-bind="translate: 'acceptedCards'"></p>
+                                                        <span data-bind="foreach: acceptedCards">
+                                                            <img data-bind="src: IBE.Config.baseUrl + 'steps/img/credit-cards/'+$data+'.png', attr: { alt : $data }" />
+                                                        </span>
+                                                        <div class="ssl">
+                                                            <a href="https://seal.godaddy.com/verifySeal?sealID=7vQJ4rQFdsC8yOrNxRUGO4usyXWXUDOYP87dJysG4SvfsUPZyY0vhW8Zn0o" target="_blank">
+                                                                <img src="https://bookwizecdn.azureedge.net/images/ssl.gif" alt="SSL" />
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                        <div class="form-group required">
+                                                            <label for="CustomerNumber" data-bind="translate: 'label_cardNumber'"></label>
+                                                            <input id="CustomerNumber" data-bind="value: cardNumber" type="text" name="card_number" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-8 no-padding">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group required">
+                                                                <label for="CardExpirationYear" data-bind="translate: 'label_expiryYear'"></label>
+                                                                <select id="CardExpirationYear" data-bind="options: yearOptions(), value: cardExpirationYear" class="form-control required"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group required">
+                                                                <label for="CardExpirationMonth" data-bind="translate: 'label_expiryMonth'"></label>
+                                                                <select id="CardExpirationMonth" data-bind="options: monthOptions(), value: cardExpirationMonth" class="form-control required"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group required">
+                                                                <label for="CardVerification" data-bind="translate: 'label_cvc'"></label>
+                                                                <input id="CardVerification" value="111" data-bind="value: cardVerification" type="text" name="card_verification" class="form-control required" maxlength="4">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </fieldset>
+
+                                            <button class="btn btn-primary" data-bind="translate: 'reservationStatusAction.'+$parent, click: $root.confirmAction.bind($data, $parent)"></button>
+
+                                        </form>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </section>
+
+        </div>
+        <div data-bind="if: reservation(), visible: isAuthenticated()" class="hidden-print">
+            <!--ko if:$root.showUpdateCreditCard()-->
+
+            <section data-bind="visible: ready()" class="reservation hotel-info update-credit-card">
+                <div class="info-text text-center">
+                    <header class="title" data-bind="translate: 'updateCreditCard'"></header>
+                </div>
+                <script id="IBEValidationMessage" type="text/html">
+                    <div class="bookwize-message">
+                        <div class="bookwize-alert-validation-message" data-bind="validationMessage: field"></div>
+                    </div>
+                </script>
+
+
+                <!--ko with:customer-->
+                <fieldset data-bind="with:creditCard, validationOptions: { messageTemplate: 'IBEValidationMessage' }">
+                    <div class="col-sm-12 no-padding" data-bind="visible: $root.hasMessage()">
+                        <div class="message">
+                            <div class="form-group">
+                                <p data-bind="css: 'alert alert-' + ($root.message().severity() == 'error' ? 'danger' : $root.message().severity())">
+                                    <span data-bind="text: $root.message().text()"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group required">
+                                <label for="CustomerCardHolder" data-bind="translate: 'label_cardHolder'"></label>
+                                <input id="CustomerCardHolder" data-bind="value: cardHolder" type="text" name="card_holder" class="form-control required">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group required">
+                                <label for="CustomerNumber" data-bind="translate: 'label_cardNumber'"></label>
+                                <input id="CustomerNumber" data-bind="value: cardNumber" type="text" name="card_number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+
+                            <div class="accepted-cards" data-bind="foreach: acceptedCards">
+                                <img data-bind="src: 'https://bookwizecdn.azureedge.net/images/'+ $data +'.png', attr: { alt : $data }, css: {'active' : $data.toLowerCase() == $parent.cardType() }">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8 no-padding">
+                            <div class="col-sm-4">
+                                <div class="form-group required">
+                                    <label for="CardExpirationYear" data-bind="translate: 'label_expiryYear'"></label>
+                                    <select id="CardExpirationYear" data-bind="options: yearOptions(), value: cardExpirationYear" class="form-control required"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group required">
+                                    <label for="CardExpirationMonth" data-bind="translate: 'label_expiryMonth'"></label>
+                                    <select id="CardExpirationMonth" data-bind="options: monthOptions(), value: cardExpirationMonth" class="form-control required"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group required">
+                                    <label for="CardVerification" data-bind="translate: 'label_cvc'"></label>
+                                    <input id="CardVerification" value="111" data-bind="value: cardVerification" type="text" name="card_verification" class="form-control required" maxlength="4">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="ssl">
+                                <a href="https://seal.godaddy.com/verifySeal?sealID=7vQJ4rQFdsC8yOrNxRUGO4usyXWXUDOYP87dJysG4SvfsUPZyY0vhW8Zn0o" target="_blank">
+                                    <img src="https://bookwizecdn.azureedge.net/images/ssl.gif" alt="SSL" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary hidden-print" data-bind="translate: 'updateCreditCard', click: function(){$root.confirmAction('ConfirmedReservation', 'UpdateCreditCard')}"></button>
+
+                </fieldset>
+
+                <!--/ko-->
+
+
+            </section>
+            <!--/ko-->
+        </div>
+        <div class="clearfix">
+
+            <section class="reservation hotel-info">
+
+                <div class="info-text text-center">
+                    <header class="title" data-bind="translate: 'hotelInformation'"></header>
+                </div>
+
+                <div class="clearfix">
+                    <div class="hotel-contact-info">
+                        <div class="col-sm-4">
+                            <div class="label" data-bind="translate: 'address'"></div>
+                            <div class="text" data-bind="html: hotel().address.street"></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="label" data-bind="translate: 'telephone'"></div>
+                            <div class="text" data-bind="text: hotel().address.phone"></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="label" data-bind="translate: 'email'"></div>
+                            <div class="text" data-bind="text: hotel().email"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <div class="google-map">
+                <div class="map" id="map" data-bind="map: googleMap"></div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

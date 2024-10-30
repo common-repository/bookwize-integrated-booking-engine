@@ -1,0 +1,38 @@
+<div class="col-sm-12 mobile-no-padding">
+    <div class="col-sm-12 col-md-3 mobile-no-padding">
+
+      <div class="bookwize-reservation-submenu">
+
+            <div class="bookwize-navbar-submenu">
+
+                <div class="bookwize-nav nav-welcome active" data-bind="click: function(){ setView('welcome')}">
+                    <span data-bind="translate: 'benefits'"></span><i class="fa fa-angle-right"></i>
+                </div>
+                <div class="bookwize-nav nav-account" data-bind="click: function(){setView('account')}">
+                    <span data-bind="translate: 'account'"></span><i class="fa fa-angle-right"></i>
+                </div>
+                <div class="bookwize-nav nav-reservation" data-bind="click: function(){setView('reservation')}">
+                    <span data-bind="translate: 'reservation'"></span><i class="fa fa-angle-right"></i>
+                </div>
+                <div class="bookwize-nav" data-bind="click: logout, translate: 'logout'"></div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-9 col-sm-12 mobile-no-padding">
+        <div class="myreservation-container" data-bind="with: reservation">
+
+                <header class="title">
+
+                    <span data-bind="translate: 'welcomeBack'"></span>
+                    <span data-bind="text: customer.firstName()"></span>
+
+                </header>
+
+
+                <div class="text" data-bind="translate: 'hotelWelcomeMessage'"></div>
+          
+        </div>
+    </div>
+</div>
